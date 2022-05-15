@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .videoWrapper {
+            position: relative;
+            /* padding-bottom: 56.25%; */
+            /* 16:9 */
+            height: 0;
+        }
+
+        .videoWrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        video {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="videoWrapper">
+        <video autoplay="autoplay" crossorigin="anonymous" preload="auto" tabindex="-1" muted="muted">
+            <source src="/fin-video.mp4" type="video/mp4" />
+            <!--Suportado em IE9, Chrome 6 e Safari 5 -->
+            O seu navegador não suporta a tag vídeo
+        </video>
+
+        <!-- <video id="comp-l33etw36_video" class="_3vVMz" role="presentation" crossorigin="anonymous" playsinline="" preload="auto" muted="" loop="" tabindex="-1" width="100%" height="100%" autoplay="" src="https://video.wixstatic.com/video/871d21_12bc258ee260418cb0e8d3e2ddd9e9a4/720p/mp4/file.mp4" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 1;"></video> -->
+        <!-- Copy & Pasted from YouTube -->
+        <!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/FvjX1gPYW7k?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe> -->
+      </div>
+
+      
+    
+    <script>
+        document.getElementsByTagName('video')[0].webkitEnterFullscreen();
+        vid = document.getElementsByTagName('video')[0];
+        setTimeout(function() {
+            vid.play();
+        }, 1000);
+        
+        // redirect after 20 seconds
+        setTimeout(function() {
+            window.location.href = "/nft-board.html";
+        }, 34500);
+    </script>
+</body>
+</html>
