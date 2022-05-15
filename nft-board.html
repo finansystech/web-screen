@@ -31,7 +31,7 @@
             justify-content: center; */
             /* transition: width 0.5s */
             display: inline-block;
-            background-image: url('/images/background.jpg') ;
+            background-image: url('./images/background.jpg') ;
             background-size: 100% 100%;
         }
         .container-info {
@@ -132,10 +132,10 @@
     </div>
     <div class="container-info">
         <div class="iam">
-            <img src="/images/f_LP_iam.png" alt="">
+            <img src="./images/f_LP_iam.png" alt="">
         </div>
         <div class="logos">
-            <img src="/images/f_LP_logos.png" alt="">
+            <img src="./images/f_LP_logos.png" alt="">
         </div>
         <div class="info-content">
             <p>
@@ -149,7 +149,7 @@
         <div class="info-card">
             <strong>Finansystech's access card</strong> provides an exclusive experience that activates a personal wallet with a free NFT, part of a 300 piece puzzle of an
             unique image, made specially for the event by brazilian artist Lincoln Lima.
-            <img src="/images/f_LP_hand.png" alt="">
+            <img src="./images/f_LP_hand.png" alt="">
         </div>
         <!-- <img class="f-logo" src="/f_logo.png" alt=""> -->
     </div>
@@ -225,11 +225,11 @@
                 for(var columns = 0; columns < number_of_columns; columns++) {
                     var image = new Image();
                     if(checkArrayForPosition(active_nfts, rows, columns)) {
-                        image.src = "/tiles/thumbs/tile_" + rows + '_' + columns + ".jpg";
+                        image.src = "./tiles/thumbs/tile_" + rows + '_' + columns + ".jpg";
                         image.className = "normal-cell";
                     }else{
                         // image.src = "/tile_blank_small.jpg";
-                        image.src = "/tiles/thumbs/tile_" + rows + '_' + columns + ".jpg";
+                        image.src = "./tiles/thumbs/tile_" + rows + '_' + columns + ".jpg";
                         image.className = "cell-transparent";
                     }
                     images.push(image);
@@ -262,7 +262,7 @@
 
         // redirect after 5 seconds
         setTimeout(function() {
-            window.location.href = "/video-page.html";
+            window.location.href = "./video-page.html";
         }, 20000);
     </script>
 </body>
