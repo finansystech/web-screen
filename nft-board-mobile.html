@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            max-height: 100vh;
+            overflow: auto;
+            background-color: rgb(19, 18, 18);
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            /* display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center; */
+            /* transition: width 0.5s */
+            display: inline-block;
+            background-image: url('./images/background.jpg') ;
+            background-size: 100% 100%;
+        }
+
+        .iam {
+            top: 50px;
+            text-align: center;
+        }
+
+        .board-row {
+            display: block;
+            height: 10%;
+            background: #fff;
+            /* display: grid; */
+            /* width: 3.33%; */
+        }
+
+        .board-cell {
+            display: inline-block;
+            width: 3.33%;
+            height: 100%;
+            background-size: 100% 100%;
+            position: relative;
+        }
+
+        .f-logo {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            height: 90px;
+        }
+
+        .info-content {
+            top: 50px;
+            left: 50px;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 45px;
+        }
+
+        .position-cell {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            color: gray;
+            font-family: 'Poppins', sans-serif;
+            font-size: 10px;
+        }
+
+        .cell-transparent {
+            background-color: rgba(0, 0, 0, 0.35);
+            opacity: 0.35;
+        }
+
+        .info-card {
+            position: relative;
+            border: rgb(233, 248, 101) 1px solid;
+            border-radius: 100px;
+            background-color: #303030;
+            color: #fff;
+            padding: 39px 48px;
+            margin-right: 40px;
+            font-size: 20px;
+            line-height: 1.2;
+        }
+
+        .info-card img {
+            position: absolute;
+            right: -73px;
+            top: -5%;
+        }
+
+        .logos {
+            text-align: center;
+            margin: 25px;
+        }
+
+        .yellow-letter {
+            color: #ffd700;
+        }
+
+    </style>
+
+    <div class="container" id="container-nft">
+    </div>
+    
+    <script>
+        var number_of_rows = 10;
+        var number_of_columns = 30;
+        var number_of_cells = number_of_rows * number_of_columns;
+
+        // random display the image
+        function randomDisplay() {
+            // return true;
+            return Math.random() < 0.5;
+        }
+
+        function checkArrayForPosition(array, x, y) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i].x == x && array[i].y == y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function callbackSuccess(data) {
+            console.log("nfts", data.nfts);
+            // Add images to container
+            var images = loadImages(number_of_rows, number_of_columns, data.nfts);
+            var container = document.querySelector('.container');
+            for(var rows = 0; rows < number_of_rows; rows++) {
+                // create row
+                var row = document.createElement('div');
+                row.classList.add('board-row');
+                container.appendChild(row);
+                for(var columns = 0; columns < number_of_columns; columns++) {
+                    var cell = document.createElement('div');
+                    cell.classList.add('board-cell');
+                    cell.classList.add(images[rows * number_of_columns + columns].className);
+                    cell.style.backgroundImage = "url('" + images[rows * number_of_columns + columns].src + "')";
+                    row.appendChild(cell);
+                    var position = document.createElement('div');
+                    position.classList.add('position-cell');
+                    position.innerHTML = rowToLetter(rows) + '' + columns;
+                    cell.appendChild(position);
+                    
+                    // cell.appendChild(images[(rows * number_of_columns) + columns]);
+                }
+            }
+            
+        }
+
+        function loadActiveCells(callback) {
+            var myHeaders = new Headers();
+            myHeaders.append("Cookie", "INGRESSCOOKIE=1651587656.711.28.763379|0aead4c56c5758d08ac39836268cc92e");
+
+            var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+            };
+
+            fetch("https://api.ofw22.finansystech.com.br/api/nfts?thumbs=NONE&device=WEB", requestOptions)
+            .then(response => response.json())
+            .then(result => callback(result))
+            .catch(error => console.log('error', error));
+        }
+
+        loadActiveCells(callbackSuccess);
+
+        // load images from folder
+        function loadImages(number_of_rows, number_of_columns, active_nfts) {
+            var images = [];
+            for(var rows = 0; rows < number_of_rows; rows++) {
+                for(var columns = 0; columns < number_of_columns; columns++) {
+                    var image = new Image();
+                    if(checkArrayForPosition(active_nfts, rows, columns)) {
+                        image.src = "./tiles/thumbs/tile_" + rows + '_' + columns + ".jpg";
+                        image.className = "normal-cell";
+                    }else{
+                        // image.src = "/tile_blank_small.jpg";
+                        image.src = "./tiles/thumbs/tile_" + rows + '_' + columns + ".jpg";
+                        image.className = "cell-transparent";
+                    }
+                    images.push(image);
+                }
+            }
+            return images;
+        }
+
+        function adjustContainerHeight() {
+            var container = document.querySelector('#container-nft');
+            var containerHeight = container.offsetHeight;
+            var windowHeight = window.innerHeight;
+            var current_nft_board_with = 100;
+            container.style.width = current_nft_board_with + "%";
+            while (container.offsetHeight > windowHeight && current_nft_board_with > 0) {
+                current_nft_board_with = current_nft_board_with - 1;
+                container.style.width = current_nft_board_with + "%";
+                // console.log(container.style.width);
+            }
+        }
+
+        
+
+
+        // row to letter
+        function rowToLetter(row) {
+            var letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+            return letters[row];
+        }
+    </script>
+</body>
+</html>
