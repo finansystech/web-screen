@@ -119,6 +119,12 @@
             color: #ffd700;
         }
 
+        .cell-owner {
+            /* border-inline: 2px solid #f00; */
+            outline: 5px solid #ffbf00;
+            outline-offset: -5px;
+        }
+
     </style>
 
     <div class="container" id="container-nft">
@@ -149,6 +155,7 @@
             // Add images to container
             var images = loadImages(number_of_rows, number_of_columns, data.nfts);
             var container = document.querySelector('.container');
+            var coordinates = getCoordinates();
             for(var rows = 0; rows < number_of_rows; rows++) {
                 // create row
                 var row = document.createElement('div');
@@ -158,6 +165,9 @@
                     var cell = document.createElement('div');
                     cell.classList.add('board-cell');
                     cell.classList.add(images[rows * number_of_columns + columns].className);
+                    if(coordinates[0] == columns && coordinates[1] == rows) {
+                        cell.classList.add('cell-owner');
+                    }
                     cell.style.backgroundImage = "url('" + images[rows * number_of_columns + columns].src + "')";
                     row.appendChild(cell);
                     var position = document.createElement('div');
@@ -222,7 +232,16 @@
             }
         }
 
-        
+        function getCoordinates(){
+            const urlParams = new URLSearchParams(window.location.search);
+            const xParam = urlParams.get('x');
+            // parse int
+            const x = parseInt(xParam);
+            const yParam = urlParams.get('y');
+            return [parseInt(xParam), parseInt(yParam)];
+        }
+
+        getCoordinates();
 
 
         // row to letter
