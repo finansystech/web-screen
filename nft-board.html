@@ -22,7 +22,7 @@
         }
 
         .container {
-            width: 40%;
+            /* width: 40%; */
             height: 100vh;
             /* display: flex;
             flex-direction: row;
@@ -32,13 +32,21 @@
             display: inline-block;
             background-image: url('./images/background.jpg') ;
             background-size: 100% 100%;
+            position: relative;
         }
+
+        .container-back{
+            top: 0;
+            left: 0;
+            height: inherit;
+        }
+        
         .container-info {
             width: 59%;
             height: 100vh;
             position: relative;
             display: inline-block;
-            padding: 50px;
+            padding: 100px;
         }
 
         .iam {
@@ -90,12 +98,16 @@
             justify-content: center;
             color: gray;
             font-family: 'Poppins', sans-serif;
-            font-size: 10px;
+            font-size: 9px;
         }
 
         .cell-transparent {
             background-color: rgba(0, 0, 0, 0.35);
             opacity: 0.35;
+        }
+
+        .cell-transparent > .position-cell {
+            color: #000;
         }
 
         .info-card {
@@ -141,10 +153,11 @@
 
     </style>
 </head>
-<body class="hidden">
+<body class="">
     
 
     <div class="container" id="container-nft">
+        <img id="container-back" class="container-back" src="./images/background.jpg" alt="">
     </div>
     <div class="container-info">
         <div class="iam">
@@ -173,6 +186,13 @@
         var number_of_rows = 10;
         var number_of_columns = 30;
         var number_of_cells = number_of_rows * number_of_columns;
+
+        // get container image size
+        var container_width = document.getElementById('container-back').offsetWidth;
+        var container = document.querySelector('.container');
+        container.style.width = container_width + 'px';
+        console.log(container_width);
+        document.getElementById('container-back').remove();
 
         // random display the image
         function randomDisplay() {
