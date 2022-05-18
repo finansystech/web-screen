@@ -187,12 +187,7 @@
         var number_of_columns = 30;
         var number_of_cells = number_of_rows * number_of_columns;
 
-        // get container image size
-        var container_width = document.getElementById('container-back').offsetWidth;
-        var container = document.querySelector('.container');
-        container.style.width = container_width + 'px';
-        console.log(container_width);
-        document.getElementById('container-back').remove();
+        
 
         // random display the image
         function randomDisplay() {
@@ -289,6 +284,12 @@
 
         window.addEventListener('DOMContentLoaded', function () {
             setTimeout(function() {
+                // get container image size
+                var container_width = document.getElementById('container-back').offsetWidth;
+                var container = document.querySelector('.container');
+                container.style.width = container_width + 'px';
+                console.log(container_width);
+                document.getElementById('container-back').remove();
                 document.body.className = 'visible';
             }, 1000);
             
