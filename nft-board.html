@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+    <title>Finansystech</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800&display=swap" rel="stylesheet">
@@ -126,7 +125,24 @@
             color: #ffd700;
         }
 
+        .hidden {
+            opacity: 0;
+        }
+
+        .visible {
+            opacity: 1;
+            transition: opacity 2s ease-out;
+        }
+
+        .hidden-exit {
+            opacity: 0;
+            transition: opacity 2s ease-out;
+        }
+
     </style>
+</head>
+<body class="hidden">
+    
 
     <div class="container" id="container-nft">
     </div>
@@ -147,7 +163,7 @@
             </p>
         </div>
         <div class="info-card">
-            <strong>Finansystech's access card</strong> provides an exclusive experience that activates a personal wallet with a free NFT, part of a 300 piece puzzle of an
+            <strong>Finansystech's access card</strong> provides an exclusive experience that activates a personal wallet with a free NFT, part of a 300-piece puzzle of an
             unique image, made specially for the event by brazilian artist Lincoln Lima.
             <img src="./images/f_LP_hand.png" alt="">
         </div>
@@ -251,7 +267,12 @@
             }
         }
 
-        
+        window.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function() {
+                document.body.className = 'visible';
+            }, 1000);
+            
+        });
 
 
         // row to letter
@@ -262,8 +283,11 @@
 
         // redirect after 5 seconds
         setTimeout(function() {
-            window.location.href = "./video-page.html";
-        }, 20000);
+            setTimeout(function() {
+                window.location.href = "./video-page.html";
+            }, 2000);
+            document.body.className = 'hidden-exit';
+        }, 30000);
     </script>
 </body>
 </html>
