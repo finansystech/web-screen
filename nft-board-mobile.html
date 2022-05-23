@@ -121,8 +121,8 @@
 
         .cell-owner {
             /* border-inline: 2px solid #f00; */
-            outline: 2px solid #ffbf00;
-            outline-offset: -5px;
+            outline: 3px solid #ffbf00;
+            outline-offset: -3px;
         }
 
     </style>
@@ -238,7 +238,7 @@
             // parse int
             const x = parseInt(xParam);
             const yParam = urlParams.get('y');
-            return [parseInt(xParam), parseInt(yParam)];
+            return [parseInt(yParam), parseInt(xParam)];
         }
 
         getCoordinates();
